@@ -29,3 +29,8 @@ In GitHub's CDN configuration, responses are being force-compressed if certain c
 You can see this because the 416 response does return a `content-range
   bytes */5183` header, indicating the CDN thinks the resource is about 5kB, which is similar to the result of `gzip object_long`.
   
+## Workaround
+
+Renaming `.pmtiles` to `.gz` or `.pmtiles.gz` should disable server-side compression completely.
+
+A [PR is open](https://github.com/jshttp/mime-db/pull/398) on the `mime-db` project to mark `.pmtiles` as uncompressible. 
