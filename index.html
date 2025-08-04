@@ -7,6 +7,8 @@
     The result of fetching the 39 byte stream via range: <span id="short"></span>
     <br/>
     The result of fetching the 5MB+ stream via range: <span id="long"></span>
+    <br/>
+    The result of fetching the 5MB+ stream via range: <span id="long_gz"></span>
   </body>
   <script>
     fetch('object_short', {headers: {Range: 'bytes=0-38'}}).then(resp => {
@@ -29,6 +31,18 @@
         const decompressedResponse = new Response(decompressedStream);
         decompressedResponse.text().then(text => {
           document.getElementById("long").innerHTML = text;
+        })
+      })
+    })
+
+    fetch('object_long.gz', {headers: {Range: 'bytes=5242880-5242918'}}).then(resp => {
+      const ds = new DecompressionStream('gzip');
+      resp.arrayBuffer().then(a => {
+        const compressedStream = new Response(a).body;
+        const decompressedStream = compressedStream.pipeThrough(ds);
+        const decompressedResponse = new Response(decompressedStream);
+        decompressedResponse.text().then(text => {
+          document.getElementById("long_gz").innerHTML = text;
         })
       })
     })
