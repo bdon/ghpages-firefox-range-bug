@@ -1,3 +1,10 @@
+## Status
+
+**As of March 13, 2026, this issue seems to have been resolved.**
+
+---
+
+
 This is a demonstration of how recent changes to GitHub Pages makes it impossible to use HTTP Ranges with Firefox.
 
 The page hosted at [bdon.github.io/ghpages-firefox-range-bug/](https://bdon.github.io/ghpages-firefox-range-bug/) works correctly on Chrome and Safari, but will throw a 416 error on Firefox.
